@@ -32,11 +32,12 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log(user);
+        setErrorMessages({ ...errorMessages, login: "", singup: "" });
+        navigate("/", { replace: true });
       } else {
         navigate("/auth/login", { replace: true });
       }
     });
-    
   }, [auth]);
 
   return (

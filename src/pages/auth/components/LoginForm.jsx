@@ -26,6 +26,10 @@ const LoginForm = ({
       },
     },
   });
+  let error = 'f';
+  if(errorMessages.login){
+    error = errorMessages.login;
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -44,7 +48,7 @@ const LoginForm = ({
     }),
     onSubmit: (values) => {
       handleLogin(values.email, values.password);
-      if (!errorMessages.login) {
+      if (!error) {
         navigate("/", { replace: true });
       }
     },

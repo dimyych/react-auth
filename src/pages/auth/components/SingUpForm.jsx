@@ -9,10 +9,19 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import Button from "@mui/material/Button";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-const SingUpForm = ({ handleSingUp, navigate, errorMessages, setErrorMessages }) => {
+const SingUpForm = ({
+  handleSingUp,
+  navigate,
+  errorMessages,
+  setErrorMessages,
+}) => {
   const [passwordVisibility, SetPasswordVisibility] = useState(false);
   const [confirmPasswordVisibility, SetConfirmPasswordVisibility] =
     useState(false);
+  let error = "f";
+  if (errorMessages.singup) {
+    error = errorMessages.login;
+  }
 
   const theme = createTheme({
     palette: {
@@ -64,8 +73,8 @@ const SingUpForm = ({ handleSingUp, navigate, errorMessages, setErrorMessages })
     }),
     onSubmit: (values) => {
       handleSingUp(values.email, values.password);
-      if (!errorMessages.singup) {
-        navigate("/auth/login ", { replace: true });
+      if (!error) {
+        navigate("/", { replace: true });
         setErrorMessages({ ...errorMessages, login: "" });
       }
     },
